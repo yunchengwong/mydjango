@@ -1,0 +1,42 @@
+{% extends '../layout.html' %}
+
+{% block body %}
+
+<h1>
+    Make List
+</h1>
+
+{% if make_list %}
+  <ul>
+  {% for make in make_list %}
+    <li>
+      {{ make.name }}
+      (
+        <a href="{% url 'autos:makeUpdate' %}">
+          Update
+        </a>
+        |
+        <a href="{% url 'autos:makeDelete' %}">
+          Delete
+        </a>
+      )
+    </li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>
+    There are no makes in the library.
+  </p>
+{% endif %}
+
+<p>
+  <a href="{% url 'autos:main' %}">
+    Back to autos
+  </a>
+  |
+  <a href="{% url 'autos:makeCreate' %}">
+    Add a make
+  </a>
+</p>
+
+{% endblock body %}
