@@ -1,0 +1,56 @@
+{% extends '../layout.html' %}
+
+{% block body %}
+
+<h1>
+  Auto List
+</h1>
+
+{% if auto_list %}
+  <ul>
+  {% for auto in auto_list %}
+    <li>
+      {{ auto.name }} ({{ auto.make }})
+      (
+        <a href="{% url 'autos:autoUpdate' %}">
+          Update
+        </a>
+        |
+        <a href="{% url 'autos:autoDelete' %}">
+          Delete
+        </a>
+      )
+      <br />
+      {{ auto.comments }} ({{ auto.mileage }} miles)
+    </li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>
+    There are no autos in the library.
+  </p>
+{% endif %}
+
+{% if make_count > 0 %}
+  <a href="{% url 'autos:autoCreate' %}">
+    Add an auto
+  </a>
+{% else %}
+  <p>
+    Please add a make before you add an auto.
+  </p>
+{% endif %}
+
+<p>
+  <a href="{% url 'autos:makeList' %}">
+    View makes
+  </a>
+
+  ({{ make_count }}) | 
+
+  <a href="{% url 'autos:makeCreate' %}">
+    Add a make
+  </a>
+</p>
+
+{% endblock body %}

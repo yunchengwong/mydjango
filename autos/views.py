@@ -11,7 +11,9 @@ from django.urls import reverse_lazy
 
 class MainView(LoginRequiredMixin, View):
   def get(self, request):
-    context = {'':''}
+    auto_list = Auto.objects.all()
+    make_count = Make.objects.count()
+    context = {'auto_list': auto_list, 'make_count': make_count}
     return render(request, 'autos/auto_list.html', context)
 
 class AutoCreateView(CreateView): # snippet: createview
