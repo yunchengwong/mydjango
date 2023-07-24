@@ -33,7 +33,8 @@ class AutoDeleteView(DeleteView): # snippet: deleteview
   
 class MakeView(LoginRequiredMixin, View):
   def get(self, request):
-    context = {'':''}
+    make_list = Make.objects.all()
+    context = {'make_list': make_list}
     return render(request, 'autos/make_list.html', context)
   
 class MakeCreate(LoginRequiredMixin, View):
