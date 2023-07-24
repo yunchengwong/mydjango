@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from django.views import View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -6,6 +6,8 @@ from .models import Auto, Make
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+
+from .forms import MakeForm
 
 # Create your views here.
 
@@ -39,8 +41,16 @@ class MakeView(LoginRequiredMixin, View):
   
 class MakeCreate(LoginRequiredMixin, View):
   def get(self, request):
-    context = {'':''}
+    form = MakeForm()
+    context = {'form': form}
     return render(request, 'autos/make_form.html', context)
+  def post(self, request):
+    form = MakeForm(request.POST) # Creating a form to change an existing article.
+    if not form.is_valid():
+      context = {'form': form}
+      return render(request, 'autos/make_form.html', context)
+    form.save()
+    return redirect(reverse_lazy('autos:main'))
   
 class MakeUpdate(LoginRequiredMixin, View):
   def get(self, request):
