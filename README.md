@@ -4,6 +4,7 @@
 pip install django
 git clone https://github.com/yunchengwong/mydjango.git
 cd mydjango
+python manage.py makemigrations
 python manage.py migrate
 python manage.py createsuperuser
 ```
