@@ -12,11 +12,11 @@
     <li>
       {{ auto.name }} ({{ auto.make }})
       (
-        <a href="{% url 'autos:autoUpdate' %}">
+        <a href="{% url 'autos:autoUpdate' auto.id %}">
           Update
         </a>
         |
-        <a href="{% url 'autos:autoDelete' %}">
+        <a href="{% url 'autos:autoDelete' auto.id %}">
           Delete
         </a>
       )

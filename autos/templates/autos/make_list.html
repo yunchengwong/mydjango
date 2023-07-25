@@ -12,11 +12,11 @@
     <li>
       {{ make.name }}
       (
-        <a href="{% url 'autos:makeUpdate' %}">
+        <a href="{% url 'autos:makeUpdate' make.id %}">
           Update
         </a>
         |
-        <a href="{% url 'autos:makeDelete' %}">
+        <a href="{% url 'autos:makeDelete' make.id %}">
           Delete
         </a>
       )

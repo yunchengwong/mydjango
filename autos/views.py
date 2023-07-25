@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from django.views import View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -18,17 +18,17 @@ class MainView(LoginRequiredMixin, View):
     context = {'auto_list': auto_list, 'make_count': make_count}
     return render(request, 'autos/auto_list.html', context)
 
-class AutoCreateView(CreateView): # snippet: createview
+class AutoCreateView(CreateView): # use auto_form.html as template by default
     model = Auto
     fields = '__all__'
     success_url = reverse_lazy('autos:main')
   
-class AutoUpdateView(UpdateView): # snippet: updateview
+class AutoUpdateView(UpdateView): 
     model = Auto
     fields = '__all__'
     success_url = reverse_lazy('autos:main')
 
-class AutoDeleteView(DeleteView): # snippet: deleteview
+class AutoDeleteView(DeleteView): 
     model = Auto
     fields = '__all__'
     success_url = reverse_lazy('autos:main')
@@ -45,7 +45,7 @@ class MakeCreate(LoginRequiredMixin, View):
     context = {'form': form}
     return render(request, 'autos/make_form.html', context)
   def post(self, request):
-    form = MakeForm(request.POST) # Creating a form to change an existing article.
+    form = MakeForm(request.POST)
     if not form.is_valid():
       context = {'form': form}
       return render(request, 'autos/make_form.html', context)
@@ -53,11 +53,35 @@ class MakeCreate(LoginRequiredMixin, View):
     return redirect(reverse_lazy('autos:main'))
   
 class MakeUpdate(LoginRequiredMixin, View):
-  def get(self, request):
-    context = {'':''}
-    return render(request, 'autos/make_form.html', context)
+  model = Make
+  success_url = reverse_lazy('autos:main')
+  template = 'autos/make_form.html'
+  
+  def get(self, request, pk):
+    make = get_object_or_404(self.model, pk=pk)
+    form = MakeForm(instance=make)
+    context = {'form': form}
+    return render(request, self.template, context)
+  def post(self, request, pk):
+    make = get_object_or_404(self.model, pk=pk)
+    form = MakeForm(request.POST, instance=make)
+    if not form.is_valid():
+      context = {'form': form}
+      return render(request, self.template, context)
+    form.save()
+    return redirect(self.success_url)
   
 class MakeDelete(LoginRequiredMixin, View):
-  def get(self, request):
-    context = {'':''}
-    return render(request, 'autos/make_confirm_delete.html', context)
+  model = Make
+  success_url = reverse_lazy('autos:main')
+  template = 'autos/make_confirm_delete.html'
+  
+  def get(self, request, pk):
+    make = get_object_or_404(self.model, pk=pk)
+    form = MakeForm(instance=make)
+    context = {'form': form, 'make': make}
+    return render(request, self.template, context)
+  def post(self, request, pk):
+    make = get_object_or_404(self.model, pk=pk)
+    make.delete()
+    return redirect(self.success_url)
