@@ -95,3 +95,11 @@ make = Make.objects.get(pk=1)
 form = MakeForm(request.POST, instance=make)
 form.save()
 ```
+
+#### Mistake I Made
+
+Invalid HTTP_HOST header: add 'yuncheng.pythonanywhere.com' to ALLOWED_HOSTS in mydjango/settings.py
+
+'autos' is not a registered namespace: add app_name = 'autos' in autos/urls.py
+
+form.save() failed: running locally in VSCode, terminal recieve GET request instead of POST, add method="post" in every form tag in HTML
