@@ -14,7 +14,7 @@
   {{ form.as_table }}
 </table>
 
-<form>
+<form method="post">
   {% csrf_token %}
   <input type="submit" value="DELETE">
   <input type="submit" onClick="window.location='{% url 'autos:main' %}'; return false;" value="Cancel">

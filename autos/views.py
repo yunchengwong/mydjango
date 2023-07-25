@@ -68,7 +68,10 @@ class MakeUpdate(LoginRequiredMixin, View):
     if not form.is_valid():
       context = {'form': form}
       return render(request, self.template, context)
-    form.save()
+    try:
+      form.save()
+    except:
+      print('error on save()')
     return redirect(self.success_url)
   
 class MakeDelete(LoginRequiredMixin, View):

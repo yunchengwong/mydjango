@@ -10,7 +10,7 @@
   Are you sure you want to delete the make: {{ make }}?
 </p>
 
-<form>
+<form method="post">
   {% csrf_token %}
   <input type="submit" value="DELETE">
   <input type="submit" onClick="window.location='{% url 'autos:main' %}'; return false;" value="Cancel">
