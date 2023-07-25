@@ -1,0 +1,14 @@
+{% extends '../layout.html' %}
+
+{% block body %}
+
+<form>
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+  </table>
+  <input type="submit" value="POST">
+  <input type="submit" onClick="window.location='{% url 'autos:main' %}'; return false;" value="Cancel">
+</form>
+
+{% endblock body %}
