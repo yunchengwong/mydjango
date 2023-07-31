@@ -405,3 +405,37 @@ class AutoCreateView(CreateView):
 (mydjango/autos/views.py): `DeleteView`
 
 (mydjango/autos/templates/): `auto_confirm_delete.html`
+
+## Reference
+
+#### `window.location`
+
+redirect in JS: 
+
+```
+window.location='<url>';
+```
+
+(https://stackoverflow.com/questions/9903659/difference-between-window-location-and-location-href)
+
+window.location == window.location.href
+
+(https://www.geeksforgeeks.org/difference-between-window-location-href-window-location-replace-and-window-location-assign-in-javascript/)
+
+window.location.replace delete current page from session history, while window.location don't
+
+#### `re-run makemigration`
+
+```
+rm */migrations/00*
+rm db.sqlite3
+pyclean
+```
+
+#### `'autos' is not a registered namespace`
+
+(autos/urls.py)
+
+```
+app_name = 'autos'
+```
