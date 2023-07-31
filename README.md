@@ -47,8 +47,6 @@ $ cd dj4e-samples
 $ django-admin startapp autos
 ```
 
-#### App Config
-
 (mydjango/settings.py)
 
 ```
