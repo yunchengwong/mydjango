@@ -2,7 +2,7 @@
 
 Simple CRUD Application
 
-## login in mydjango
+## Login in Django
 
 (mydjango/urls.py)
 
@@ -29,7 +29,7 @@ urlpatterns = [
 </form>
 ```
 
-## model in autos
+## Model in Autos
 
 (mydjango/autos/models.py)
 
